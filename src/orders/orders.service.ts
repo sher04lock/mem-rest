@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { OrderModel, IOrder, OrderDocument } from 'src/models/order';
+import { OrderModel, IOrder, OrderDocument } from 'src/orders/order';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 

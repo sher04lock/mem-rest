@@ -1,5 +1,7 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { OrdersController } from './orders.controller';
+import { OrdersService } from './orders.service';
+import { MockedOrderModelProvider } from './orders.service.spec';
 
 describe('Orders Controller', () => {
   let module: TestingModule;
@@ -7,11 +9,15 @@ describe('Orders Controller', () => {
   beforeAll(async () => {
     module = await Test.createTestingModule({
       controllers: [OrdersController],
+      providers: [
+        OrdersService,
+        MockedOrderModelProvider
+      ]
     }).compile();
   });
 
   it('should be defined', () => {
-    const controller: OrdersController = module.get<OrdersController>(OrdersController);
+    let controller = module.get<OrdersController>(OrdersController);
     expect(controller).toBeDefined();
   });
 });

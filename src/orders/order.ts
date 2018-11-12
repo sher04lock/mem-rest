@@ -1,6 +1,6 @@
-import { ItemModel } from "./item";
+import { ItemModel } from "../models/item";
 import { Document } from "mongoose";
-import { ICustomer } from "./customer";
+import { ICustomer } from "../models/customer";
 
 
 export interface IOrder {

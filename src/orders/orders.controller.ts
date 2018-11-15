@@ -1,7 +1,7 @@
 import { Controller, Get, Post, Param, Body, Put, Delete, Logger } from '@nestjs/common';
 import { OrderModel } from './order';
 import { OrdersService } from './orders.service';
-import { NotificationsProducerService } from 'src/common/notifications/notifications-producer/notifications-producer.service';
+import { NotificationsProducerService } from '../common/notifications/notifications-producer/notifications-producer.service';
 
 @Controller('orders')
 export class OrdersController {

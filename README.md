@@ -6,6 +6,8 @@ $ npm install
 
 ## Running the app
 
+Firstly, make sure you have `.env` file created and configured correctly. You can find example config in `.env.example`.
+
 ```bash
 # development
 $ npm run start

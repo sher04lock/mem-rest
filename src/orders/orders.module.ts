@@ -3,7 +3,7 @@ import { OrdersController } from './orders.controller';
 import { OrdersService } from './orders.service';
 import { MongooseModule } from '@nestjs/mongoose';
 import { OrderSchema } from './orders.schema';
-import { CommonModule } from 'src/common/common.module';
+import { CommonModule } from '../common/common.module';
 
 @Module({
     imports: [

@@ -1,7 +1,7 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, BadRequestException } from '@nestjs/common';
 import { OrderModel, IOrder, OrderDocument } from 'src/orders/order';
 import { InjectModel } from '@nestjs/mongoose';
-import { Model } from 'mongoose';
+import { Model, CastError } from 'mongoose';
 
 @Injectable()
 export class OrdersService {
@@ -17,7 +17,13 @@ export class OrdersService {
     }
 
     async getById(id: string): Promise<IOrder> {
-        return await this.orderModel.findById(id);
+        try {
+            return await this.orderModel.findById(id);
+        } catch (error) {
+            if (error instanceof CastError) {
+                throw new BadRequestException("Given id is invalid");
+            }
+        }
     }
 
     async getByDate(date: Date): Promise<IOrder[]> {

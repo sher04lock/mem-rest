@@ -3,7 +3,7 @@ import { OrderModel } from './order';
 import { OrdersService } from './orders.service';
 import { NotificationsProducerService, NotificationEventType } from '../common/notifications/notifications-producer/notifications-producer.service';
 import moment = require('moment');
-import { ApiModelPropertyOptional, ApiImplicitQuery } from '@nestjs/swagger';
+import { ApiImplicitQuery } from '@nestjs/swagger';
 
 @Controller('orders')
 export class OrdersController {

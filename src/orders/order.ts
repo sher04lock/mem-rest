@@ -2,7 +2,8 @@ import { ItemModel } from "../models/item";
 import { Document } from "mongoose";
 import { ICustomer, CustomerModel } from "../models/customer";
 import { ApiModelProperty, ApiModelPropertyOptional } from "@nestjs/swagger";
-import { IsDate, IsDateString, IsString, IsOptional, IsArray, IsNotEmpty } from "class-validator";
+import { IsString, IsOptional, IsArray, Validate } from "class-validator";
+import { StringToDateValidator } from "../pipes/string-to-date-validator";
 
 export interface IOrder {
     date: Date;
@@ -40,7 +41,7 @@ export class OrderModel implements IOrder {
     @ApiModelPropertyOptional()
     readonly phone?: string;
 
-    @IsDateString()
+    @Validate(StringToDateValidator)
     @ApiModelProperty()
     readonly date: Date;
 

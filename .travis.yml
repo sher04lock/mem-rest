@@ -11,5 +11,5 @@ jobs:
     - stage: Test
       name: Unit tests
       script: npm test
-     - script: npm run test:e2e
       name: E2E tests
+      script: npm run test:e2e

@@ -1,7 +1,8 @@
-import { Controller, Get, Post, Param, Body, Put, Delete, Logger } from '@nestjs/common';
+import { Controller, Get, Post, Param, Body, Put, Delete, Logger, BadRequestException, Query, UsePipes, ValidationPipe } from '@nestjs/common';
 import { OrderModel } from './order';
 import { OrdersService } from './orders.service';
 import { NotificationsProducerService, NotificationEventType } from '../common/notifications/notifications-producer/notifications-producer.service';
+import moment = require('moment');
 
 @Controller('orders')
 export class OrdersController {
@@ -13,7 +14,11 @@ export class OrdersController {
     ) { }
 
     @Get()
-    getAll() {
+    getAll(@Query("date") dateString?: string) {
+        if (dateString) {
+            return this.getByDate(dateString);
+        }
+
         this.logger.log("/GET", this.constructor.name);
         return this.ordersService.getAll();
     }
@@ -24,7 +29,18 @@ export class OrdersController {
         return this.ordersService.getById(id);
     }
 
+    getByDate(dateString: string) {
+        this.logger.log(`/GET/date=${dateString}`, this.constructor.name);
+        const utcDate = moment.utc(dateString);
+        if (!utcDate.isValid()) {
+            throw new BadRequestException("Invalid date");
+        }
+
+        return this.ordersService.getByDate(utcDate.toDate());
+    }
+
     @Post()
+    @UsePipes(new ValidationPipe({ transform: true }))
     async create(@Body() order: OrderModel) {
         this.logger.log(`/POST`, this.constructor.name);
         const createdOrder = await this.ordersService.create(order);
@@ -33,6 +49,7 @@ export class OrdersController {
     }
 
     @Put(":id")
+    @UsePipes(new ValidationPipe({ transform: true }))
     async update(@Param("id") id, @Body() order: OrderModel) {
         this.logger.log(`/PUT/${id}`, this.constructor.name);
         const updatedOrder = await this.ordersService.update(id, order);

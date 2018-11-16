@@ -20,6 +20,10 @@ export class OrdersService {
         return await this.orderModel.findById(id);
     }
 
+    async getByDate(date: Date): Promise<IOrder[]> {
+        return await this.orderModel.find({ date: date });
+    }
+
     async update(id: string, order: OrderModel) {
         const returnUpdatedObject = { new: true };
         return await this.orderModel.findByIdAndUpdate(id, order, returnUpdatedObject);

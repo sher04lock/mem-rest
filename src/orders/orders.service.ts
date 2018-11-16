@@ -21,7 +21,8 @@ export class OrdersService {
     }
 
     async update(id: string, order: OrderModel) {
-        return await this.orderModel.findByIdAndUpdate(id, order);
+        const returnUpdatedObject = { new: true };
+        return await this.orderModel.findByIdAndUpdate(id, order, returnUpdatedObject);
     }
 
     async remove(id: string) {

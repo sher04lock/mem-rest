@@ -17,7 +17,8 @@ const QueueConnectionProvider = {
         NotificationsProducerService
     ],
     exports: [
-        NotificationsProducerService
+        NotificationsProducerService,
+        QueueConnectionProvider
     ]
 })
 export class CommonModule { }

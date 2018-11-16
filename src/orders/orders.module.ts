@@ -13,6 +13,7 @@ import { CommonModule } from '../common/common.module';
     controllers: [OrdersController],
     providers: [
         OrdersService
-    ]
+    ],
+    exports: [OrdersService]
 })
 export class OrdersModule { }

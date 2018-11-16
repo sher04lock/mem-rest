@@ -8,7 +8,8 @@ cache:
 
 jobs:
   include:
-    - stage: Unit test
+    - stage: Test
+      name: Unit tests
       script: npm test
-    - stage: E2E test
-      script: npm run test:e2e
+     - script: npm run test:e2e
+      name: E2E tests

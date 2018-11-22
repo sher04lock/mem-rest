@@ -42,7 +42,7 @@ export class OrderModel implements IOrder {
     readonly phone?: string;
 
     @Validate(StringToDateValidator)
-    @ApiModelProperty()
+    @ApiModelProperty({ type: String })
     readonly date: Date;
 
     @IsString()

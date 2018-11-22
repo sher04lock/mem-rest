@@ -6,6 +6,7 @@ import * as cors from 'cors';
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
   app.use(cors());
+  app.use(forceSSL)
 
   const options = new DocumentBuilder()
     .setTitle('Orders REST API')
@@ -19,3 +20,12 @@ async function bootstrap() {
   await app.listen(process.env.PORT || 3000);
 }
 bootstrap();
+
+const forceSSL = function () {
+  return function (req, res, next) {
+    if (req.headers['x-forwarded-proto'] !== 'https') {
+      return res.redirect(['https://', req.get('Host'), req.url].join(''));
+    }
+    next();
+  }
+}

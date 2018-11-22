@@ -6,7 +6,7 @@ import * as cors from 'cors';
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
   app.use(cors());
-  app.use(forceSSL)
+  app.use(forceSSL())
 
   const options = new DocumentBuilder()
     .setTitle('Orders REST API')

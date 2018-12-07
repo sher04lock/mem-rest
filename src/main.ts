@@ -12,6 +12,7 @@ async function bootstrap() {
     .setTitle('Orders REST API')
     .setDescription('REST API for MEM')
     .setVersion('1.0')
+    .setSchemes("https")
     .addTag('orders')
     .build();
   const document = SwaggerModule.createDocument(app, options);
